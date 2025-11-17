@@ -71,7 +71,6 @@
     "rollup-plugin-nodent": "^0.2.2",
     "rollup-plugin-screeps": "^1.0.0",
     "rollup-plugin-typescript2": "^0.29.0",
-    "screeps-server-mockup": "^1.5.1",
     "standard-version": "^9.0.0",
     "ts-jest": "^26.5.3",
     "ts-node": "^9.1.0",
@@ -83,7 +82,7 @@
   "resolutions": {
     "isolated-vm": "^4.6.0",
     "nan": "^2.18.0",
-    "node-gyp": "^9.4.0"
+    "node-gyp": "12.1.0"
   },
   "config": {
     "commitizen": {
@@ -91,6 +90,11 @@
     }
   },
   "volta": {
-    "node": "18.18.0"
+    "node": "20.10.0"
+  },
+  "overrides": {
+    "@screeps/driver": {
+      "node-gyp": "12.1.0"
+    }
   }
 }

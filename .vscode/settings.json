@@ -9,7 +9,7 @@
     "editor.formatOnSave": false
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "editor.formatOnSave": true,
   "editor.renderWhitespace": "boundary",
@@ -22,7 +22,7 @@
     "**/.nyc_output": true,
     "**/coverage": true,
     "dist/**": true,
-    "node_modules/**": true,
+    "node_modules/**": false,
     "typings/**": true,
     "**/server": true
   },
@@ -31,10 +31,10 @@
     "**/.github": true,
     "**/.idea": true,
     "**/.nyc_output": true,
-    "**/.vscode": true,
+    "**/.vscode": false,
     "**/coverage": true,
     "**/dist": true,
-    "**/node_modules": true,
+    "**/node_modules": false,
     "**/server": true
   },
   "mochaExplorer.files": "test/**/*.test.ts"

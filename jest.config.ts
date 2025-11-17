@@ -1,7 +1,5 @@
 import type { Config } from "@jest/types";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { compilerOptions } from "./tsconfig";
+import { compilerOptions } from "./tsconfig.json";
 import { pathsToModuleNameMapper } from "ts-jest/utils";
 
 const config: Config.InitialOptions = {
@@ -11,8 +9,10 @@ const config: Config.InitialOptions = {
     "^.+\\.tsx?$": "ts-jest"
   },
   setupFilesAfterEnv: ["<rootDir>/test/setup.ts"],
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths || {}, { prefix: "<rootDir>/" }),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths as any, {
+    prefix: "<rootDir>/"
+  }),
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   testEnvironment: "jest-environment-jsdom-fifteen"
 };
