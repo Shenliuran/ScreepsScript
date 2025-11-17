@@ -21,7 +21,7 @@
     ".rpt2_cache/**": true,
     "**/.nyc_output": true,
     "**/coverage": true,
-    "dist/**": true,
+    "dist/**": false,
     "node_modules/**": false,
     "typings/**": true,
     "**/server": true
@@ -33,7 +33,7 @@
     "**/.nyc_output": true,
     "**/.vscode": false,
     "**/coverage": true,
-    "**/dist": true,
+    "**/dist": false,
     "**/node_modules": false,
     "**/server": true
   },
