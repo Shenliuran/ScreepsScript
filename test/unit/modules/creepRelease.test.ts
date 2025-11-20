@@ -33,7 +33,7 @@ describe("creep 发布核心测试", () => {
       source: [getMockSource({ id: "1" as Id<Source> }), getMockSource({ id: "2" as Id<Source> })]
     });
     Game.rooms.W1N1 = room;
-    release = new RoomCreepRelease(({ addTask: mockAddTask, room } as unknown) as RoomSpawnController);
+    release = new RoomCreepRelease({ addTask: mockAddTask, room } as unknown as RoomSpawnController);
     // mock spawnController 的添加任务方法
     mockAddTask.mockReset();
     mockRemoveCreep.mockReset();
