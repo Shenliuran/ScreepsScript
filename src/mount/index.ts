@@ -89,7 +89,7 @@ export const extensionAppPlugin: AppLifecycleCallbacks = {
     const spawns: StructureSpawn[] = Object.values(Game.spawns);
     if (spawns.length > 1) return;
 
-    log("欢迎来到 Screeps 的世界!\n", ["LokiSharp bot"], "green");
+    log("欢迎来到 Screeps 的世界!\n", ["Pelagian bot"], "green");
     // 设置中心点位并执行初始化配置
     setBornCenter(spawns[0]);
     spawns[0].room.controller.onLevelChange(1);

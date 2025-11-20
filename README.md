@@ -1,6 +1,6 @@
 # ScreepsScript
 
-LokiSharp 的 [Screeps](https://screeps.com/a/#!/map) 半自动 AI 项目
+Pelagian 的 [Screeps](https://screeps.com/a/#!/map) 半自动 AI 项目
 
 ## 准备
 
@@ -12,7 +12,7 @@ LokiSharp 的 [Screeps](https://screeps.com/a/#!/map) 半自动 AI 项目
 - 包管理工具 ([Yarn](https://yarnpkg.com/en/docs/getting-started) 或 [npm](https://docs.npmjs.com/getting-started/installing-node))
 - Rollup CLI (可选, 通过 `npm install -g rollup` 安装)
 
-从[这里](https://github.com/LokiSharp/ScreepsScript/archive/master.zip)下载并解压最新的代码。
+从[这里](https://github.com/Shenliuran/ScreepsScript/archive/master.zip)下载并解压最新的代码。
 
 在终端中打开这个目录并运行你的包管理器安装依赖包。
 

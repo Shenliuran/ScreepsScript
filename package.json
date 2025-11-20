@@ -27,14 +27,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LokiSharp/ScreepsScript.git"
+    "url": "git+https://github.com/Shanliuran/ScreepsScript.git"
   },
-  "author": "LokiSharp",
+  "author": "Pelagian",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/LokiSharp/ScreepsScript/issues"
+    "url": "https://github.com/Shenliuran/ScreepsScript/issues"
   },
-  "homepage": "https://github.com/LokiSharp/ScreepsScript#readme",
+  "homepage": "https://github.com/Shenliuran/ScreepsScript#readme",
   "engines": {
     "node": "16.x || 18.x || 20.x"
   },
