@@ -41,9 +41,16 @@ export const countEnergyChangeRatio = function (room: Room, withLimit = false): 
   let energyGetRate: number;
   setRoomStats(room.name, oldStats => {
     // 计算能量获取速率，如果 energyGetRate 为 NaN 的话代表之前还未进行过统计，先设置为 0
-    energyGetRate = _.isNaN(oldStats.energyGetRate)
-      ? 0
-      : (totalEnergy - oldStats.totalEnergy) / (Game.time - oldStats.energyCalcTime);
+    if (_.isNaN(oldStats.totalEnergy)) {
+      energyGetRate = 0;
+    } else {
+      const deltaTime = Game.time - oldStats.energyCalcTime;
+      if (deltaTime === 0) {
+        energyGetRate = oldStats.energyGetRate;
+      } else {
+        energyGetRate = (totalEnergy - oldStats.totalEnergy) / deltaTime;
+      }
+    }
 
     return {
       totalEnergy,
