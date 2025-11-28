@@ -129,7 +129,7 @@ export default class RoomHelp extends RoomExtension {
       },
       {
         name: "房间拓展 API",
-        describe: "用于执行本房间的对外扩张计划",
+        describe: "用于执行本房间的对外扩张计划（主房间必须要有 Storage 才能添加外矿，即需要达到RCL4。在 RCL4 之前）。",
         api: [
           {
             title: "拓展新外矿",
