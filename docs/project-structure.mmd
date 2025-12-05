@@ -1,0 +1,85 @@
+graph TB
+    subgraph "项目根目录"
+        Main[main.ts] --> App[Framework App]
+        Package[package.json]
+        Readme[README.md]
+        Tsconfig[tsconfig.json]
+    end
+
+    subgraph "模块系统(src/modules)"
+        Module1[ConstructionController] --> ConstructionFiles[index.ts, types.d.ts]
+        Module2[AutoPlanning] --> AutoPlanningFiles[index.ts, planBase.ts, planBasePos.ts, planRoad.ts, planWall.ts, types.d.ts]
+        Module3[EnergyController] --> EnergyFiles[index.ts, countEnergyChangeRatio.ts, findStrategy.ts, getRoomEnergyTarget.ts, types.d.ts]
+        Module4[CreepModule] --> CreepFiles[index.ts, creepHandle.ts, creepNumberListener.ts, utils.ts]
+        Module5[CrossShard] --> CrossShardFiles[index.ts, handleStrategies.ts, types.d.ts]
+        Module6[DelayQueue] --> DelayFiles[index.ts, types.d.ts]
+        Module7[MapLibrary] --> MapFiles[index.ts, compression.ts, controller.ts, library.ts, types.ts]
+        Module8[Stats] --> StatsFiles[index.ts, types.d.ts]
+        Module9[CombatSquad] --> CombatFiles[CombatSquad.ts, squadStrategies.ts, types.d.ts]
+        Module10[Move] --> MoveFiles[index.ts, Move.ts, Cross.ts, crossRules.ts, WayPoint.ts, types.d.ts]
+        Module11[RoomModule] --> RoomFiles[RoomAccessor.ts, power/, share/, shortcut/, spawn/, task/]
+    end
+
+    subgraph "原型拓展系统(src/mount)"
+        Mount[Mount System] --> RoomMount[RoomExtension/]
+        Mount --> CreepMount[CreepExtension/]
+        Mount --> StructureMount[StructureExtension/]
+        Mount --> PowerCreepMount[PowerCreepExtension/]
+        Mount --> GlobalMount[GlobalExtension/]
+    end
+
+    subgraph "设置系统(src/setting)"
+        Setting[Setting System] --> CreepSetting[CreepSetting.ts]
+        Setting --> FactorySetting[FactorySetting.ts]
+        Setting --> LabSetting[LabSetting.ts]
+        Setting --> LayoutSetting[LayoutSetting.ts]
+        Setting --> OtherSetting[OtherSetting.ts]
+        Setting --> TransferSetting[TransferSetting.ts]
+        Setting --> WallSetting[WallSetting.ts]
+    end
+
+    subgraph "工具系统(src/utils)"
+        Utils[Utils System] --> Console[console/]
+        Utils --> Creep[creep/]
+        Utils --> Global[global/]
+    end
+
+    subgraph "角色系统(src/role)"
+        Role[Role System] --> Base[base/]
+        Role --> Remote[remote/]
+        Role --> War[war/]
+        Role --> Types[types/]
+    end
+
+    subgraph "核心框架"
+        App --> MountSystem[原型拓展挂载]
+        App --> Lifecycle[生命周期管理]
+    end
+
+    subgraph "生命周期回调"
+        Lifecycle --> born[born - 初次放置spawn]
+        Lifecycle --> reset[reset - 全局重置]
+        Lifecycle --> tickStart[tickStart - Tick开始]
+        Lifecycle --> afterWork[afterWork - 所有onWork后]
+        Lifecycle --> tickEnd[tickEnd - Tick结束]
+    end
+
+    subgraph "运行流程"
+        App --> do[遍历Game对象]
+        do --> doRooms[Game.rooms]
+        do --> doStructures[Game.structures]
+        do --> doCreeps[Game.creeps]
+        do --> doPowerCreeps[Game.powerCreeps]
+    end
+
+    Main -.-> Module1
+    Main -.-> Module2
+    Main -.-> Module3
+    Main -.-> Module4
+    Main -.-> Module5
+    Main -.-> Module6
+    Main -.-> Module7
+    Main -.-> Module8
+    Main -.-> Module9
+    Main -.-> Module10
+    Main -.-> Module11
