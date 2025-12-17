@@ -19,7 +19,7 @@ export const countEnergyChangeRatio = function (room: Room, withLimit = false): 
       if (withLimit) {
         const amountWithLimit = energyAmount - ENERGY_USE_LIMIT[structure.structureType];
         // 现有能量低于标准，相当于该容器没有能量可用
-        return amountWithLimit <= 0 ? 0 : amountWithLimit;
+        return (amountWithLimit <= 0 || !amountWithLimit) ? 0 : amountWithLimit;
       }
       return energyAmount;
     });
