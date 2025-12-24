@@ -1,6 +1,7 @@
 import { base, give, hail, orderExtend, seeres } from "@/mount/GlobalExtension/extension/common";
 import { cancelNuker as cancelnuker, confirmNuker as confirmnuker, nuker } from "@/mount/GlobalExtension/alias/nuker";
-import { hasCreep, removeCreep, showCreep } from "@/modules/creep/utils";
+// import { hasCreep, removeCreep, showCreep } from "@/modules/creep/utils";
+import creep from "@/mount/GlobalExtension/extension/creepManager"
 import bypass from "@/mount/GlobalExtension/extension/bypass";
 import { clearFlag } from "@/utils/global/clearFlag";
 import comm from "@/mount/GlobalExtension/alias/commodity";
@@ -31,11 +32,7 @@ export default {
   // 全局发送资源到指定房间
   give,
   // 将 creepApi 挂载到全局方便手动操作
-  creep: {
-    show: showCreep,
-    remove: removeCreep,
-    has: hasCreep
-  },
+  creep,
   // 绕路模块
   bypass,
   // 掠夺模块

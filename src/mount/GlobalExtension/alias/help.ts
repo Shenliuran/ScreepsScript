@@ -118,6 +118,11 @@ export default (): string =>
             title: "掠夺配置",
             describe: "查看掠夺配置帮助信息",
             functionName: "reive.help"
+          },
+          {
+            title: "Creep配置",
+            describe: "查看全局creep配置信息",
+            functionName: "creep.help"
           }
         ]
       }
