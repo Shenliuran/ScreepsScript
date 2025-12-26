@@ -219,6 +219,15 @@ export default class RoomExtension extends Room {
   }
 
   /**
+   * 给本房间签名
+   *
+   * @param content 要签名的内容
+   * @param targetRoomName 要签名到的房间名（默认为本房间）
+   */
+  public sign(content: string, targetRoomName: string = undefined): string {
+    return this.spawner.release.sign(content, targetRoomName)
+  }
+  /**
    * 拓展新的外矿
    *
    * @param remoteRoomName 要拓展的外矿房间名
