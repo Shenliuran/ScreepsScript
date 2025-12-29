@@ -9,7 +9,7 @@ import RoomTransportTaskController from "@/modules/room/task/transport/taskContr
 import RoomWorkTaskController from "@/modules/room/task/work/taskController";
 import createGetter from "@/utils/global/createGetter";
 import mountShortcut from "@/modules/room/shortcut/mountShortcut";
-import RoomArsenlController from "./extension/arsenel";
+import RoomArsenelController from "./extension/arsenel";
 
 export { RoomExtension, RoomConsole, RoomHelp };
 
@@ -63,7 +63,7 @@ declare global {
     /**
      * 兵工厂配置
      */
-    arsenel: RoomArsenlController
+    arsenel: RoomArsenelController
   }
 }
 
@@ -82,7 +82,7 @@ export default function mountRoom(): void {
     ["work", RoomWorkTaskController],
     ["spawner", RoomSpawnController],
     ["power", RoomPowerController],
-    ["arsenel", RoomArsenlController],
+    ["arsenel", RoomArsenelController],
   ];
 
   // 房间插件实例化后会被分类保存到这里

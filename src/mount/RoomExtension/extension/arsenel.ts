@@ -5,7 +5,15 @@ import { DEFAULT_FLAG_NAME } from "@/setting/OtherSetting"
 /**
  * TODO 添加兵工厂配置
  */
-export default class RoomArsenlController extends RoomSpawnController {
+export default class RoomArsenelController extends RoomSpawnController {
+
+  /**
+   * 实例化房间孵化管理
+   * @param roomName 要管理的房间名
+   */
+  constructor(rootName: string) {
+    super(rootName)
+  }
   /**
    * 孵化基础进攻单位
    *
