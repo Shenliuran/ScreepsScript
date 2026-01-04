@@ -40,12 +40,30 @@ export default class ControllerExtension extends StructureController {
   private drawEnergyHarvestInfo() {
     const roomStats = getRoomStats(this.room.name);
     if (!roomStats || !roomStats.totalEnergy || !roomStats.energyGetRate) return;
-    const { totalEnergy, energyGetRate } = roomStats;
+    const { totalEnergy, energyGetRate, controllerRatio } = roomStats;
     const { x, y } = this.pos;
     this.room.visual.text(
-      `可用能量 ${totalEnergy || 0} 获取速率 ${energyGetRate ? energyGetRate.toFixed(2) : 0}`,
+      `可用能量 ${totalEnergy || 0}`,
       x + 1,
       y + 0.25,
+      {
+        align: "left",
+        opacity: 0.5
+      }
+    );
+    this.room.visual.text(
+      `获取速率 ${energyGetRate ? energyGetRate.toFixed(2) : 0}`,
+      x + 1,
+      y + 0.25 + 1,
+      {
+        align: "left",
+        opacity: 0.5
+      }
+    );
+    this.room.visual.text(
+      `升级进度 ${controllerRatio ? controllerRatio.toFixed(2) : 0} %`,
+      x + 1,
+      y + 0.25 + 2,
       {
         align: "left",
         opacity: 0.5
