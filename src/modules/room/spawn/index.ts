@@ -124,7 +124,7 @@ export default class RoomSpawnController extends RoomAccessor<SpawnTask[]> {
     if (spawn.spawning || this.memory.length === 0) return;
 
     const task = this.memory[0];
-    this.room.visual.text(`当前孵化队列 ${this.memory.map(t => `${t.name}(${t.role})`).join(" | ")}`, 1, 1, {
+    this.room.visual.text(`当前孵化队列 ${this.memory.map(t => `${t.name}`)}`, 1, 1, {
       align: "left"
     });
 
