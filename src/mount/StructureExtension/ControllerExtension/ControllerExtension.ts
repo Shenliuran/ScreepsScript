@@ -42,8 +42,8 @@ export default class ControllerExtension extends StructureController {
     const { x, y } = this.pos;
     this.room.visual.text(
       `升级进度 ${controllerRatio ? controllerRatio.toFixed(2) : 0} %`,
-      x - 1 - 0.5,
-      y + 0.25 + 2,
+      x - 1.5,
+      y + 2.25,
       {
         align: "left",
         opacity: 0.5
@@ -51,8 +51,8 @@ export default class ControllerExtension extends StructureController {
     );
     this.room.visual.text(
       `剩余升级所需时间 ${remainingUpateTime ? this.formatSecondsToDHMS(remainingUpateTime, 2) : 0}`,
-      x - 1 - 0.5,
-      y + 0.25 + 3,
+      x - 1.5,
+      y + 3.25,
       {
         align: "left",
         opacity: 0.5
@@ -80,7 +80,7 @@ export default class ControllerExtension extends StructureController {
     this.room.visual.text(
       `获取速率 ${energyGetRate ? energyGetRate.toFixed(2) : 0}`,
       x + 1,
-      y + 0.25 + 1,
+      y + 1.25,
       {
         align: "left",
         opacity: 0.5
