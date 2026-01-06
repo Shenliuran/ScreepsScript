@@ -15,6 +15,7 @@ export default class ControllerExtension extends StructureController {
     this.room.transport.draw(1, 13);
 
     this.drawEnergyHarvestInfo();
+    this.drawUpdateInfo()
     if (Game.time % 20) return;
     // 如果等级发生变化了就运行 creep 规划
     if (this.stateScanner()) this.onLevelChange(this.level);
@@ -34,13 +35,38 @@ export default class ControllerExtension extends StructureController {
     }
   }
 
+  private drawUpdateInfo(): void {
+    const roomStats = getRoomStats(this.room.name);
+    if (!roomStats || !roomStats.controllerRatio || !roomStats.remainingUpateTime) return;
+    const { controllerRatio, remainingUpateTime } = roomStats;
+    const { x, y } = this.pos;
+    this.room.visual.text(
+      `升级进度 ${controllerRatio ? controllerRatio.toFixed(2) : 0} %`,
+      x - 1 - 0.5,
+      y + 0.25 + 2,
+      {
+        align: "left",
+        opacity: 0.5
+      }
+    );
+    this.room.visual.text(
+      `剩余升级所需时间 ${remainingUpateTime ? this.formatSecondsToDHMS(remainingUpateTime, 2) : 0}`,
+      x - 1 - 0.5,
+      y + 0.25 + 3,
+      {
+        align: "left",
+        opacity: 0.5
+      }
+    );
+  }
+
   /**
    * 临时 - 显示能量获取速率
    */
   private drawEnergyHarvestInfo() {
     const roomStats = getRoomStats(this.room.name);
     if (!roomStats || !roomStats.totalEnergy || !roomStats.energyGetRate) return;
-    const { totalEnergy, energyGetRate, controllerRatio } = roomStats;
+    const { totalEnergy, energyGetRate } = roomStats;
     const { x, y } = this.pos;
     this.room.visual.text(
       `可用能量 ${totalEnergy || 0}`,
@@ -55,15 +81,6 @@ export default class ControllerExtension extends StructureController {
       `获取速率 ${energyGetRate ? energyGetRate.toFixed(2) : 0}`,
       x + 1,
       y + 0.25 + 1,
-      {
-        align: "left",
-        opacity: 0.5
-      }
-    );
-    this.room.visual.text(
-      `升级进度 ${controllerRatio ? controllerRatio.toFixed(2) : 0} %`,
-      x + 1,
-      y + 0.25 + 2,
       {
         align: "left",
         opacity: 0.5
@@ -113,6 +130,34 @@ export default class ControllerExtension extends StructureController {
   }
 
   /**
+   * 将总秒数转换为 天:时:分:秒（d:h:m:s）格式，自动补零为两位数
+   * @param {number} totalSeconds - 总秒数（非负整数）
+   * @returns {string} 格式化后的时间字符串（如 02:01:02:03）
+   */
+  private formatSecondsToDHMS(origianlTotalseconds: number, decimalDigits: number = 2): string {
+
+    // 1. 计算天数：1天=86400秒（24*3600），向下取整
+    const totalSeconds = Number(origianlTotalseconds.toFixed(decimalDigits))
+    const days = Math.floor(totalSeconds / 86400);
+    // 2. 计算剩余秒数（扣除天数后）
+    const remainingSecondsAfterDays = totalSeconds % 86400;
+    // 3. 复用基础版的逻辑计算时分秒
+    const hours = Math.floor(remainingSecondsAfterDays / 3600);
+    const remainingSecondsAfterHours = remainingSecondsAfterDays % 3600;
+    const minutes = Math.floor(remainingSecondsAfterHours / 60);
+
+    const seconds = remainingSecondsAfterHours % 60;
+
+    const multiplier = Math.pow(10, decimalDigits);
+    const truncatedNum = Math.floor(seconds * multiplier) / multiplier;
+
+    // 4. 补零函数
+    const padZero = (num) => num.toString().padStart(2, '0');
+
+    // 5. 拼接并返回格式化字符串
+    return `${padZero(days)} days : ${padZero(hours)} hours : ${padZero(minutes)} minutes : ${padZero(truncatedNum)} seconds`;
+  }
+  /**
    * 统计自己的等级信息
    *
    * @returns 为 true 时说明自己等级发生了变化
@@ -121,11 +166,18 @@ export default class ControllerExtension extends StructureController {
     let hasLevelChange = false;
     setRoomStats(this.room.name, stats => {
       hasLevelChange = stats.controllerLevel !== this.level;
+      const deltaTime = Game.time - stats.energyCalcTime;
+      const progressRemaining = this.progressTotal - this.progress
+      const deltaProgress = this.progress - stats.progress
       return {
         // 统计升级进度
         controllerRatio: (this.progress / this.progressTotal) * 100,
         // 统计房间等级
-        controllerLevel: this.level
+        controllerLevel: this.level,
+        // 统计剩余更新所需时间
+        remainingUpateTime: ( progressRemaining / deltaProgress) * deltaTime,
+
+        progress: this.progress
       };
     });
 

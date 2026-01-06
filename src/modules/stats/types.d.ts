@@ -62,6 +62,17 @@ interface RoomStats {
    */
   commRes: { [commType: string]: number };
   resources: { [resourceType: string]: number };
+
+  /**
+   * 剩余更新时间
+   */
+  remainingUpateTime?: number;
+
+  /**
+   * 当前房间控制器进度
+   */
+  progress?: number;
+
 }
 
 interface Memory {
