@@ -221,6 +221,13 @@ const actionStrategy: ActionStrategy = {
         .getFreeSpace()
         .filter(pos => !(pos.x === link.pos.x && pos.y === link.pos.y))
         .find(pos => pos.isNearTo(link.pos));
+
+      // 如果没有找到合适的目标位置，变更为简单模式
+      if (!targetPos) {
+        delete creep.memory.targetId;
+        creep.memory.harvestMode = HARVEST_MODE.SIMPLE
+        return false
+      }
       creep.goTo(targetPos, { range: 0 });
 
       return creep.pos.isEqualTo(targetPos);
